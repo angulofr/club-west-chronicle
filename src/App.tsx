@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ActiveTab, HeroHeader } from './components/HeroHeader';
 import { OwnershipFlow } from './components/OwnershipFlow';
 import { ProposalComparison } from './components/ProposalComparison';
+import { TimelineChart } from './components/TimelineChart';
 import { TimelineSection } from './components/TimelineSection';
 import { LegalAndHoaVault } from './components/LegalAndHoaVault';
 import { StakeholdersAndSources } from './components/StakeholdersAndSources';
@@ -17,6 +18,7 @@ export function App() {
 
       <main className="container main-content">
         {show('flow') && <OwnershipFlow />}
+        {(activeTab === 'all' || activeTab === 'timeline') && <TimelineChart />}
         {show('proposals') && <ProposalComparison />}
         {show('timeline') && <TimelineSection />}
         {show('vault') && <LegalAndHoaVault />}
@@ -29,7 +31,7 @@ export function App() {
             <strong>Club West Chronicle</strong> · Ahwatukee Foothills Parcel Archive (16400 S. 14th Ave, Phoenix, AZ 85045)
           </div>
           <div className="footer-note">
-            Compiled from Ahwatukee Foothills News, Maricopa County Superior Court &amp; AZ Court of Appeals records, and Foothills Club West HOA disclosures (updated Nov 2026).
+            Compiled from Ahwatukee Foothills News, Maricopa County Superior Court &amp; AZ Court of Appeals filings, Foothills Club West CC&Rs (Doc #89-337438), and Wayback Machine snapshots.
           </div>
         </div>
       </footer>

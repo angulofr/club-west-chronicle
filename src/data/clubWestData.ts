@@ -23,7 +23,9 @@ export const PARCEL_METADATA = {
   hoaManagement: '360 Community Management, LLC (formerly Vision Community Management)',
   hoaContactEmail: 'clubwest@360communitymgmt.com',
   hoaPhone: '602-863-3600',
-  hoaPortalUrl: 'https://www.360propertymgt.com/community/foothills-club-west-community-association/',
+  hoaPortalUrl:
+    'https://web.archive.org/web/20260619065059/https://www.360propertymgt.com/community/foothills-club-west-community-association/',
+  hoaPortalLiveUrl: 'https://www.360propertymgt.com/community/foothills-club-west-community-association/',
 };
 
 export const ERAS: { id: EraId | 'all'; label: string; years: string; description: string }[] = [
@@ -37,7 +39,7 @@ export const ERAS: { id: EraId | 'all'; label: string; years: string; descriptio
     id: 'founding',
     label: 'Founding & Covenants',
     years: '1989–2010',
-    description: 'Master CC&Rs, 1993 championship course opening, and declarant-right transfers.',
+    description: 'Master CC&Rs (Doc #89-337438), 1993 course opening, and declarant transfers.',
   },
   {
     id: 'water-crisis',
@@ -70,7 +72,7 @@ export const OWNERSHIP_FLOW: OwnershipNode[] = [
     landStatus: 'Dedicated Golf & Open Space',
     tone: 'emerald',
     highlights: [
-      '1989 Master CC&Rs recorded requiring 75% member vote for major amendments.',
+      'July 21, 1989 Master CC&Rs (Doc #89-337438) required 75% member vote for major amendments.',
       '1993 Golf Course Declaration restricted parcel to golf, driving range & clubhouse.',
       '18-hole par-72 course designed by Brian Whitcomb & Ken Kavanaugh opened in 1993.',
     ],
@@ -140,22 +142,25 @@ export const OWNERSHIP_FLOW: OwnershipNode[] = [
 export const TIMELINE_EVENTS: TimelineEvent[] = [
   {
     id: 'evt-1989-ccrs',
-    dateLabel: '1989',
-    sortOrder: 198901,
+    dateLabel: 'July 21, 1989',
+    sortOrder: 198907,
     era: 'founding',
     category: 'Founding & Covenants',
-    title: 'Master CC&Rs Recorded for Foothills Club West',
+    title: 'Master CC&Rs Recorded for Foothills Club West (Doc #89-337438)',
     subtitle: 'Foundational community governance with 75% supermajority protection',
     summary:
-      'The original master developer recorded the Master Declaration of Covenants, Conditions, and Restrictions (CC&Rs) with Maricopa County for Foothills Club West, establishing neighborhood tract rules and high amendment thresholds.',
+      'Recorded July 21, 1989 with the Maricopa County Recorder (Doc No. 89-337438), the Master Declaration of CC&Rs established Foothills Club West’s master governance, architectural controls, and high amendment thresholds.',
     details: [
       'Structured developer declarant rights alongside individual residential Tract Declarations.',
       'Required a strict 75% supermajority member vote for substantive amendments to the master covenants.',
-      'Later became the decisive legal benchmark when homeowners challenged 2018–2019 HOA board maneuvers.',
+      'Archived directly via Wayback Machine from Vision Community Management document records.',
     ],
-    keyFigures: ['Shea Homes / UDC Homes', 'Maricopa County Recorder'],
-    metrics: [{ label: 'Amendment Threshold', value: '75% Supermajority' }],
-    sourceIds: ['src-hoawatch', 'src-ccr-analysis'],
+    keyFigures: ['Shea Homes / UDC Homes', 'Maricopa County Recorder (Doc #89-337438)'],
+    metrics: [
+      { label: 'Recorder Doc', value: '89-337438' },
+      { label: 'Amendment Threshold', value: '75% Supermajority' },
+    ],
+    sourceIds: ['src-ccr-pdf', 'src-savvy-area'],
   },
   {
     id: 'evt-1993-opening',
@@ -166,10 +171,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     title: 'Club West Golf Club Opens & Golf Course Declaration Recorded',
     subtitle: '162-acre, 18-hole championship desert course opens in Ahwatukee',
     summary:
-      'Designed by golf course architects Brian Whitcomb and Ken Kavanaugh, the 18-hole, par-72 Club West Golf Club opened in 1993 alongside a recorded Golf Course Declaration restricting the land to golf and clubhouse uses.',
+      'Designed by golf course architects Brian Whitcomb and Ken Kavanaugh, the 18-hole, par-72 Club West Golf Club opened in 1993 alongside a recorded Golf Course Declaration restricting the land to golf, driving range, and clubhouse uses.',
     details: [
       'Built as the centerpiece recreational and visual greenbelt amenity for Foothills Club West homeowners.',
-      'The separate 1993 Golf Course Declaration explicitly restricted the property to a golf course, driving range, and related clubhouse/recreational facilities.',
+      'The separate Golf Course Declaration explicitly restricted the property to golf course, driving range, and clubhouse facilities.',
       'Adjacent premium lots were marketed and sold around fairway views and open-space corridors.',
     ],
     keyFigures: ['Brian Whitcomb', 'Ken Kavanaugh', 'Shea Homes'],
@@ -177,7 +182,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       { label: 'Course Acreage', value: '162 Acres' },
       { label: 'Layout', value: '18 Holes · Par 72' },
     ],
-    sourceIds: ['src-golfpass', 'src-ccr-analysis'],
+    sourceIds: ['src-golf-dec-pdf', 'src-golfpass'],
   },
   {
     id: 'evt-2010-declarant',
@@ -191,10 +196,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       'In September 2010, the Foothills Club West Community Association executed and recorded an Assignment of Declarant Rights stepping into the shoes of original developer Shea Homes.',
     details: [
       'Intended at the time to wrap up developer transition control within the mature community.',
-      'A decade later in CV2020-003577, homeowners argued the HOA board improperly leveraged those declarant rights to bypass member supermajority protections.',
+      'Later declared null and void ab initio by Judge Daniel J. Kiley in CV2020-003577 when used to bypass the 75% member vote.',
     ],
     keyFigures: ['Foothills Club West HOA', 'Shea Homes'],
-    sourceIds: ['src-ccr-analysis', 'src-hoawatch'],
+    sourceIds: ['src-azhoawatch', 'src-azhoawatch-oral-2020'],
   },
   {
     id: 'evt-2016-water-crisis',
@@ -209,7 +214,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     details: [
       'Recycled gray water was no longer reliably available, sending irrigation costs soaring toward hundreds of thousands of dollars annually.',
       'The Foothills Club West HOA sued Gee alleging intentional neglect and a "hay-like appearance" violating CC&Rs requiring first-class maintenance.',
-      'Gee countersued, accusing the HOA and local officials of conspiring to depress the course’s market value and force a "fire sale" (citing an offer as low as $10).',
+      'Gee countersued, accusing the HOA and local officials of conspiring to depress the course’s market value and force a "$10 fire sale."',
     ],
     keyFigures: ['Wilson Gee (Kwang Co. / Hiro Investment)', 'Foothills Club West HOA', 'City of Phoenix'],
     metrics: [
@@ -234,7 +239,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ],
     keyFigures: ['Interim Golf Operator', 'City of Phoenix Water Services'],
     metrics: [{ label: 'Cumulative Water Bills', value: '$200,000+' }],
-    sourceIds: ['src-kennard'],
+    sourceIds: ['src-kennard', 'src-arizonapress'],
   },
   {
     id: 'evt-2018-amendment',
@@ -243,19 +248,19 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     era: 'legal-battles',
     category: 'HOA & Governance',
     title: 'HOA Board Executes Closed-Session Golf Declaration Amendments',
-    subtitle: 'Attempt to lower non-golf conversion threshold from 75% to majority of 31% quorum',
+    subtitle: 'First (2018) & Fifth (2019) Amendments attempt to bypass 75% supermajority rule',
     summary:
-      'In October 2018 and into 2019, the Foothills Club West HOA board met in closed executive sessions and enacted a First Amendment to the 1993 Golf Course Declaration to create an easier path away from golf use.',
+      'In October 2018 (First Amendment) and 2019 (Fifth Amendment), the Foothills Club West HOA board met in closed executive sessions to enact amendments lowering the vote required to transition the golf course to non-golf uses.',
     details: [
       'Created a mechanism allowing conversion to non-golf uses via a simple majority vote of a 31% member quorum rather than the Master CC&Rs’ 75% supermajority.',
-      'Sparked intense homeowner backlash over transparency, Arizona HOA open-meeting rules, and board authority.',
+      'Sparked intense homeowner backlash over transparency, Arizona HOA Open Meeting Law compliance, and board authority.',
     ],
     keyFigures: ['Foothills Club West HOA Board', 'Vision Community Management'],
     metrics: [
       { label: 'Master CC&R Rule', value: '75% Supermajority' },
       { label: 'Board Amendment Rule', value: 'Majority of 31% Quorum' },
     ],
-    sourceIds: ['src-ccr-analysis', 'src-savvy'],
+    sourceIds: ['src-azhoawatch', 'src-azhoawatch-oral-2021'],
   },
   {
     id: 'evt-2020-edge-sale',
@@ -280,32 +285,33 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
   },
   {
     id: 'evt-2020-conservancy-hoa-suit',
-    dateLabel: 'December 2020',
+    dateLabel: 'June 2020 – Early 2021',
     sortOrder: 202012,
     era: 'legal-battles',
     category: 'Litigation & Appeals',
-    title: 'Conservancy Sues HOA Over Secret Amendments (CV2020-003577)',
-    subtitle: 'Judge Daniel J. Kiley invalidates HOA board’s 2018–2019 governance maneuvers',
+    title: 'Conservancy Defeats Secret HOA Amendments (CV2020-003577)',
+    subtitle: 'Judge Daniel J. Kiley rules 2010 assignment and 2018–2019 amendments void ab initio',
     summary:
-      'Homeowner nonprofit Club West Conservancy filed CV2020-003577 against the Foothills Club West Community Association. Maricopa County Superior Court Judge Daniel J. Kiley granted injunctive and summary-judgment relief dismantling the board’s unauthorized amendments.',
+      'Homeowner nonprofit Club West Conservancy sued the Foothills Club West Community Association in CV2020-003577. Maricopa County Superior Court Judge Daniel J. Kiley granted a preliminary injunction and summary judgment declaring the 2010 Assignment, 2018 First Amendment, and 2019 Fifth Amendment null and void ab initio.',
     details: [
-      'Challenged closed-door executive-session voting and unilateral exercise of assigned declarant rights to sidestep the 75% Master CC&R threshold.',
-      'Judge Kiley affirmed adjacent homeowners’ representational standing and ruled that "good intentions cannot supersede the dictates of the master [covenants]."',
+      'Oral arguments held June 22, 2020 and January 22, 2021 (transcripts archived by AZ HOA Watch).',
+      'Ruled the HOA board violated Arizona Open Meeting Law in closed executive sessions and lacked authority to bypass the 75% Master CC&R threshold.',
+      'Judge Kiley affirmed adjacent homeowners’ representational standing and held that "good intentions cannot supersede the dictates of the master [covenants]."',
     ],
     keyFigures: ['Club West Conservancy', 'Foothills Club West HOA', 'Judge Daniel J. Kiley'],
     metrics: [{ label: 'Docket', value: 'CV2020-003577' }],
-    sourceIds: ['src-ccr-analysis', 'src-hoawatch'],
+    sourceIds: ['src-azhoawatch', 'src-azhoawatch-oral-2020', 'src-azhoawatch-oral-2021'],
   },
   {
     id: 'evt-2021-edge-suit',
-    dateLabel: 'Late 2021 – Mar 2024',
+    dateLabel: 'Late 2021 – Mar 2025',
     sortOrder: 202403,
     era: 'legal-battles',
     category: 'Litigation & Appeals',
     title: 'Multi-Year Developer Litigation Clears Land Use (CV2021-018435)',
     subtitle: 'Courts rule property owners are not legally forced to operate golf in perpetuity',
     summary:
-      'In CV2021-018435 (Club West Conservancy v. Shea Homes LP & The Edge at Club West LLC), Maricopa County Superior Court judges—including Judge Susanna C. Pineda—ruled against the Conservancy’s bid to lock the 162 acres permanently as a golf course, entering final judgment milestones around March 13.',
+      'In CV2021-018435 (Club West Conservancy v. Shea Homes LP & The Edge at Club West LLC), Maricopa County Superior Court judges—including Judges Timothy Thompson and Susanna C. Pineda—ruled against the Conservancy’s bid to lock the 162 acres permanently as a golf course.',
     details: [
       'Spanning over four years of motions, standing challenges, and indemnification disputes.',
       'Cleared the overarching title/use cloud by confirming owners may pursue alternative uses subject to City of Phoenix zoning and General Plan rules.',
@@ -316,26 +322,26 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       { label: 'Docket', value: 'CV2021-018435' },
       { label: 'Reported Fee Toll', value: '~$1.07M' },
     ],
-    sourceIds: ['src-kennard', 'src-savvy', 'src-justia'],
+    sourceIds: ['src-omlaw-petition', 'src-kennard', 'src-savvy-blog'],
   },
   {
     id: 'evt-2025-appeals',
-    dateLabel: 'October 27, 2025',
+    dateLabel: 'May – Oct 27, 2025',
     sortOrder: 202510,
     era: 'legal-battles',
     category: 'Litigation & Appeals',
     title: 'Arizona Court of Appeals Special Action Ruling (1 CA-SA 25-0117)',
     subtitle: 'Appellate panel clarifies Rule 54(b) & attorney-fee timelines without restoring golf mandate',
     summary:
-      'In a published special action opinion filed October 27, 2025, the Arizona Court of Appeals (Division One) granted procedural relief on how trial courts enter sua sponte Rule 54(b) partial final judgments alongside pending attorney-fee motions, while leaving the core redevelopment clearance intact.',
+      'Following the May 1, 2025 Petition for Special Action, the Arizona Court of Appeals (Division One) issued a published opinion on October 27, 2025 clarifying how trial courts enter sua sponte Rule 54(b) partial final judgments alongside pending attorney-fee motions, while leaving the core redevelopment clearance intact.',
     details: [
       'Opinion delivered by Presiding Judge Michael S. Catlett, joined by Chief Judge Randall M. Howe and Judge D. Steven Williams.',
       'Clarified interplay between Arizona Rules of Civil Procedure 54(b), 54(g)(3), and 54(h) for partial judgments and fee deadlines.',
-      'Post-judgment fee and finality matters continued into early 2026.',
+      'Full Special Action Petition PDF and published appellate opinion linked in the Legal Vault.',
     ],
     keyFigures: ['Presiding Judge Michael S. Catlett', 'Club West Conservancy', 'Shea Homes LP', 'The Edge at Club West LLC'],
     metrics: [{ label: 'Appellate Docket', value: '1 CA-SA 25-0117' }],
-    sourceIds: ['src-justia'],
+    sourceIds: ['src-justia-opinion', 'src-findlaw-opinion', 'src-omlaw-petition'],
   },
   {
     id: 'evt-2026-harmony-flip',
@@ -377,7 +383,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       { label: 'Proposed Units', value: '573 Homes' },
       { label: 'Gross Density', value: '3.54 DU / Acre' },
     ],
-    sourceIds: ['src-kennard', 'src-savvy'],
+    sourceIds: ['src-kennard', 'src-savvy-blog'],
   },
   {
     id: 'evt-2026-sekisui-house',
@@ -400,7 +406,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       { label: 'Preserved Open Space', value: '88.5 Acres (54.6%)' },
       { label: 'Gross Density', value: '1.72 DU / Acre' },
     ],
-    sourceIds: ['src-ahwatukee-sekisui', 'src-5amphoenix'],
+    sourceIds: ['src-ahwatukee-sekisui', 'src-azbigmedia'],
   },
 ];
 
@@ -452,7 +458,7 @@ export const PROPOSALS: ProposalSpec[] = [
     openSpaceAcres: 88.5,
     developedAcres: 73.5,
     grossDensityPerAcre: 1.72,
-    accentColor: '#2B6CB0',
+    accentColor: '#235789',
     highlights: [
       '278 single-family homes — 295 fewer homes (-51.5%) than D.R. Horton’s concept.',
       '88.5 acres (54.6% of site) set aside for amenitized open space, passive open space & drainage.',
@@ -464,23 +470,47 @@ export const PROPOSALS: ProposalSpec[] = [
 export const HOA_DOCUMENTS: HoaDocument[] = [
   {
     id: 'doc-1989-ccr',
-    year: '1989',
+    year: 'July 21, 1989',
     title: 'Master Declaration of CC&Rs (Foothills Club West)',
+    recorderRef: 'Maricopa County Recorder Doc #89-337438',
     authority: 'Original Master Developer (Shea / UDC Homes)',
     thresholdOrRule: '75% Supermajority Member Vote for Major Amendments',
     significance:
       'Foundational governing covenant for Foothills Club West and its sub-association Tract Declarations. Establishes architectural rules, assessments, and the 75% homeowner approval barrier.',
     status: 'Active / Foundational',
+    links: [
+      {
+        label: 'Master CC&Rs PDF (Wayback)',
+        url: 'https://web.archive.org/web/20240616145328/https://www.visioncommunitymanagement.com/media/vcmdocs/500828.pdf',
+        isWayback: true,
+      },
+      {
+        label: 'Original PDF',
+        url: 'https://www.visioncommunitymanagement.com/media/vcmdocs/500828.pdf?6ada46d142d88',
+      },
+    ],
   },
   {
     id: 'doc-1993-golf-dec',
     year: '1993',
     title: 'Golf Course Declaration',
-    authority: 'Original Developer / Recorded Maricopa County Instrument',
+    recorderRef: 'Recorded Maricopa County Covenant Instrument',
+    authority: 'Original Developer / Foothills Club West',
     thresholdOrRule: 'Dedicated Golf, Driving Range & Clubhouse Use',
     significance:
       'Restricted the 162-acre golf parcel to golf and recreational clubhouse operations, serving as the cornerstone of homeowners’ preservation claims.',
     status: 'Disputed Mechanism',
+    links: [
+      {
+        label: 'Golf Declaration PDF (Wayback)',
+        url: 'https://web.archive.org/web/20240802175536/https://www.visioncommunitymanagement.com/media/vcmdocs/954973.pdf',
+        isWayback: true,
+      },
+      {
+        label: 'Original PDF',
+        url: 'https://www.visioncommunitymanagement.com/media/vcmdocs/954973.pdf?63229b581f3e0',
+      },
+    ],
   },
   {
     id: 'doc-2010-declarant',
@@ -489,28 +519,65 @@ export const HOA_DOCUMENTS: HoaDocument[] = [
     authority: 'Shea Homes → Foothills Club West HOA Board',
     thresholdOrRule: 'Board Acceptance of Developer Transition Rights',
     significance:
-      'Transferred remaining developer declarant rights to the HOA board; later scrutinized in CV2020-003577 when the board sought to alter golf restrictions without a 75% homeowner vote.',
+      'Transferred remaining developer declarant rights to the HOA board; later declared null and void ab initio by Judge Daniel J. Kiley in CV2020-003577.',
     status: 'Challenged / Invalidated',
+    links: [
+      {
+        label: 'CV2020-003577 Case Archive (Wayback)',
+        url: 'https://web.archive.org/web/20260614135722/https://azhoawatch.org/court-cases/',
+        isWayback: true,
+      },
+      {
+        label: 'June 2020 Oral Argument PDF',
+        url: 'https://azhoawatch.org/wp-content/uploads/azhoawatch/court-case-downloads/club-west-conservancy-v-foothills-club-west-community-association/raw/2020-06-22_003_oral-argument.pdf',
+      },
+    ],
   },
   {
     id: 'doc-2018-amendment',
     year: 'Oct 2018 – 2019',
-    title: 'First Amendment to Golf Course Declaration & Board Actions',
+    title: 'First Amendment (2018) & Fifth Amendment (2019) to Golf Declaration',
     authority: 'Foothills Club West HOA Board (Executive Session)',
     thresholdOrRule: 'Simple Majority of 31% Quorum (Bypass Attempt)',
     significance:
-      'Attempted to create a lower-threshold vote to transition the course out of golf use. Blocked by Judge Daniel J. Kiley in CV2020-003577 for violating master CC&Rs and governance rules.',
+      'Attempted to create a lower-threshold vote to transition the course out of golf use. Declared null and void ab initio by Judge Daniel J. Kiley in CV2020-003577.',
     status: 'Challenged / Invalidated',
+    links: [
+      {
+        label: 'Jan 2021 Oral Argument PDF',
+        url: 'https://azhoawatch.org/wp-content/uploads/azhoawatch/court-case-downloads/club-west-conservancy-v-foothills-club-west-community-association/raw/2021-01-22_014_oral-argument.pdf',
+      },
+      {
+        label: 'AZ HOA Watch Archive (Wayback)',
+        url: 'https://web.archive.org/web/20260614135722/https://azhoawatch.org/court-cases/',
+        isWayback: true,
+      },
+    ],
   },
   {
     id: 'doc-arch-guidelines',
-    year: 'Ongoing',
-    title: 'Architectural & Landscaping Guidelines (360 Community Management)',
-    authority: 'Foothills Club West Architectural Committee',
-    thresholdOrRule: 'Prior Approval Required for Exterior / Yard Changes',
+    year: 'Rev. Jan 26, 2022',
+    title: 'Architectural & Landscaping Guidelines + Approved Paint Palette',
+    authority: 'Foothills Club West Architectural Committee (360 / Vision)',
+    thresholdOrRule: 'Prior Approval Required for Exterior / Golf-Facing Lots',
     significance:
-      'Governs exterior paint (even matching colors), hardscaping, front-yard plant minimums, pergolas, and shade sails via the 360 Community Management owner portal.',
+      'Details restrictions for lots facing washes and the former golf course, exterior paint approvals, front-yard plant minimums, pergolas, and shade sails.',
     status: 'Active / Foundational',
+    links: [
+      {
+        label: 'Revised Guidelines (2022 PDF)',
+        url: 'https://visioncommunitymanagement.com/images/surveymonkey/FCW%20Revised%20Guidelines%202022-01-26.pdf',
+      },
+      {
+        label: 'Approved Paint Colors PDF',
+        url: 'https://www.visioncommunitymanagement.com/media/vcmdocs/1494914.pdf?630a05db89ab9',
+      },
+      {
+        label: '360 Portal (Wayback)',
+        url: 'https://web.archive.org/web/20260619065059/https://www.360propertymgt.com/community/foothills-club-west-community-association/',
+        isWayback: true,
+      },
+    ],
   },
 ];
 
@@ -529,19 +596,45 @@ export const LEGAL_DOCKETS: LegalDocket[] = [
       'Coincided with City of Phoenix water shutoff over ~$159,000 in unpaid potable water bills ($100,000 paid to restore service).',
     ],
     financialImpact: '$159K delinquent water dispute; $100K partial payment',
+    links: [
+      {
+        label: 'Club + Resort Business Countersuit Report',
+        url: 'https://clubandresortbusiness.com/club-west-gc-owner-countersues-hoa/',
+      },
+    ],
   },
   {
     id: 'case-2020-003577',
     caseNumber: 'CV2020-003577',
     court: 'Maricopa County Superior Court',
     title: 'Club West Conservancy v. Foothills Club West Community Association',
-    filedOrDecided: 'Filed Dec 2020 · Injunction & Summary Judgment',
+    filedOrDecided: 'Filed 2020 · Preliminary Injunction & 2021 Summary Judgment',
     presidingJudges: 'Judge Daniel J. Kiley',
-    outcome: 'Conservancy prevailed against HOA board amendments.',
+    outcome:
+      'Conservancy prevailed: 2010 Assignment, 2018 First Amendment & 2019 Fifth Amendment declared null and void ab initio.',
     coreIssues: [
-      'Invalidated HOA board’s 2018–2019 executive-session amendments bypassing the 75% Master CC&R threshold.',
+      'Invalidated HOA board’s executive-session amendments bypassing the 75% Master CC&R threshold and Arizona Open Meeting Law.',
       'Affirmed adjacent homeowners’ representational standing to enforce master covenants.',
       'Held that "good intentions cannot supersede the dictates of the master [covenants]."',
+    ],
+    links: [
+      {
+        label: 'June 2020 Oral Argument PDF',
+        url: 'https://azhoawatch.org/wp-content/uploads/azhoawatch/court-case-downloads/club-west-conservancy-v-foothills-club-west-community-association/raw/2020-06-22_003_oral-argument.pdf',
+      },
+      {
+        label: 'Jan 2021 Oral Argument PDF',
+        url: 'https://azhoawatch.org/wp-content/uploads/azhoawatch/court-case-downloads/club-west-conservancy-v-foothills-club-west-community-association/raw/2021-01-22_014_oral-argument.pdf',
+      },
+      {
+        label: 'AZ HOA Watch Archive (Wayback)',
+        url: 'https://web.archive.org/web/20260614135722/https://azhoawatch.org/court-cases/',
+        isWayback: true,
+      },
+      {
+        label: 'AZ Courts Minutes Search (CV2020-003577)',
+        url: 'https://apps.azcourts.gov/publicaccess/minutes.aspx',
+      },
     ],
   },
   {
@@ -558,6 +651,17 @@ export const LEGAL_DOCKETS: LegalDocket[] = [
       'Triggered heavy attorney-fee disputes and mid-March final judgment / fee milestones.',
     ],
     financialImpact: 'Reported ~$1.07M attorney-fee judgment / liability pressure on Conservancy',
+    links: [
+      {
+        label: 'May 2025 Special Action Petition PDF (Wayback)',
+        url: 'https://web.archive.org/web/20260216032008/https://www.omlaw.com/wp-content/uploads/2025-05-01-Club-West-Shea-Petition-for-Special-Action.pdf',
+        isWayback: true,
+      },
+      {
+        label: 'AZ Courts Minutes Search (CV2020-003577)',
+        url: 'https://apps.azcourts.gov/publicaccess/minutes.aspx',
+      },
+    ],
   },
   {
     id: 'case-2025-1casa',
@@ -572,6 +676,21 @@ export const LEGAL_DOCKETS: LegalDocket[] = [
       'Clarified appeal and fee-tracking timelines under Arizona Rules of Civil Procedure.',
       'Did not reinstate any perpetual golf-course mandate on the 162-acre parcel.',
     ],
+    links: [
+      {
+        label: 'Published Opinion (Justia)',
+        url: 'https://law.justia.com/cases/arizona/court-of-appeals-division-one-published/2025/1-ca-sa-25-0117.html',
+      },
+      {
+        label: 'Published Opinion (FindLaw)',
+        url: 'https://caselaw.findlaw.com/court/az-court-of-appeals/117877870.html',
+      },
+      {
+        label: 'Petition PDF (Wayback)',
+        url: 'https://web.archive.org/web/20260216032008/https://www.omlaw.com/wp-content/uploads/2025-05-01-Club-West-Shea-Petition-for-Special-Action.pdf',
+        isWayback: true,
+      },
+    ],
   },
 ];
 
@@ -582,7 +701,7 @@ export const STAKEHOLDERS: Stakeholder[] = [
     role: 'Original Master Developer (1989–1993)',
     category: 'Original Developer & Design',
     description:
-      'Recorded the 1989 Master CC&Rs and 1993 Golf Course Declaration, transferred declarant rights in 2010, and was later named in CV2021-018435.',
+      'Recorded the July 21, 1989 Master CC&Rs (Doc #89-337438) and 1993 Golf Course Declaration, transferred declarant rights in 2010, and was later named in CV2021-018435.',
   },
   {
     id: 'stk-architects',
@@ -630,7 +749,7 @@ export const STAKEHOLDERS: Stakeholder[] = [
     role: 'Homeowner Advocacy Nonprofit',
     category: 'HOA & Community',
     description:
-      'Resident coalition that blocked secret 2018–2019 HOA amendments in CV2020-003577 but lost the broader perpetual-golf fight in CV2021-018435.',
+      'Resident coalition that voided secret 2018–2019 HOA amendments in CV2020-003577 but lost the broader perpetual-golf fight in CV2021-018435.',
   },
   {
     id: 'stk-nathan',
@@ -664,62 +783,185 @@ export const SOURCES: SourceReference[] = [
     title: 'New builder eyes fewer homes for Club West course',
     publisher: 'Ahwatukee Foothills News (Paul Maryniak)',
     url: 'https://www.ahwatukee.com/news/new-builder-eyes-fewer-homes-for-club-west-course/article_c9b96076-7307-443f-8adf-fed3dcd0ddef.html',
-    note: 'Primary November 2026 report detailing Sekisui House Ltd.’s 278-home, 88.5-acre open space pre-application.',
-  },
-  {
-    id: 'src-5amphoenix',
-    title: 'Phoenix Planning & Development Pre-Application Summary (Sekisui House)',
-    publisher: '5am Phoenix / MuckRack Coverage Index',
-    url: 'https://muckrack.com/paul-maryniak',
-    note: 'Summarizes Paul Maryniak’s reporting on Sekisui House’s 278-home / 88.5-acre Club West filing.',
-  },
-  {
-    id: 'src-kennard',
-    title: 'Club West Golf Course History, Litigation & 2026 Updates',
-    publisher: 'Camille Kennard Real Estate / Ahwatukee Market Tracker',
-    url: 'https://www.camillekennardrealtor.com',
-    note: 'Documents 2016 closure, 2017–Feb 2018 $200K water bankruptcy, $750K Edge sale, $2.1M May 29, 2026 sale, and 573-home D.R. Horton pre-app.',
+    kind: 'News Article',
+    note: 'November 2026 report detailing Sekisui House Ltd.’s 278-home, 88.5-acre open space pre-application.',
   },
   {
     id: 'src-ktar',
-    title: 'Investor Group Purchases Shuttered Ahwatukee Club West Course & Relists',
+    title: 'Owners of shuttered Club West Golf Course shop site to builders',
     publisher: 'KTAR News',
-    url: 'https://ktar.com',
-    note: 'Covers Community Harmony Coalition’s $2.1M purchase and Nathan & Associates Inc. marketing.',
+    url: 'https://ktar.com/arizona-business/owners-club-west-golf-course-shop-site',
+    waybackUrl:
+      'https://web.archive.org/web/20260809013035/https://ktar.com/arizona-business/owners-club-west-golf-course-shop-site',
+    kind: 'News Article',
+    note: 'Covers Community Harmony Coalition’s $2.1M purchase, $750K 2020 sale, and Nathan & Associates listing.',
   },
   {
-    id: 'src-justia',
-    title: 'Club West Conservancy v. Shea Homes LP, et al. (No. 1 CA-SA 25-0117)',
-    publisher: 'Arizona Court of Appeals Division One (via Justia)',
-    url: 'https://law.justia.com',
-    note: 'October 27, 2025 published special action decision addressing CV2021-018435 Rule 54(b) and attorney-fee procedures.',
+    id: 'src-kennard',
+    title: 'Why Ahwatukee’s Club West Golf Course Sold for $2.1 Million (and What That Means Next Door)',
+    publisher: 'Camille Kennard Real Estate',
+    url: 'https://camillekennardrealtor.com/blog/why-ahwatukees-club-west-golf-course-sold-for-dollar21-million-and-what-that-price-means-if-you-buy-next-door',
+    kind: 'News Article',
+    note: 'Full breakdown of 2016 closure, 2017–Feb 2018 $200K water bankruptcy, May 29, 2026 sale, and D.R. Horton’s 573-home pre-app.',
   },
   {
-    id: 'src-hoawatch',
-    title: 'Foothills Club West HOA & CV2020-003577 Governance Archive',
-    publisher: 'AZ HOA Watch / 360 Community Management Portal',
-    url: 'https://www.360propertymgt.com/community/foothills-club-west-community-association/',
-    note: 'Official Foothills Club West HOA management portal, governing document access, and CV2020-003577 references.',
+    id: 'src-azbigmedia',
+    title: 'Here are the revitalization plans for Club West Golf Course land',
+    publisher: 'AZ Big Media',
+    url: 'https://azbigmedia.com/real-estate/commercial-real-estate/here-are-the-revitalization-plans-for-club-west-golf-course-land/',
+    waybackUrl:
+      'https://web.archive.org/web/20260317144920/https://azbigmedia.com/real-estate/commercial-real-estate/here-are-the-revitalization-plans-for-club-west-golf-course-land/',
+    kind: 'News Article',
+    note: 'Archived report covering earlier Club West revitalization and redevelopment concepts.',
+  },
+  {
+    id: 'src-arizonapress',
+    title: 'Closing golf courses can be bogeys for neighborhoods — Ahwatukee community analysis',
+    publisher: 'Arizona Progress & Gazette',
+    url: 'https://arizonaprogressgazette.com/closing-golf-courses-can-be-bogeys-for-neighborhoods-but-one-ahwatukee-community-may-show-a-compelling-way-forward/',
+    waybackUrl:
+      'https://web.archive.org/web/20260416015359/https://arizonaprogressgazette.com/closing-golf-courses-can-be-bogeys-for-neighborhoods-but-one-ahwatukee-community-may-show-a-compelling-way-forward/',
+    kind: 'News Article',
+    note: 'Examines neighborhood fallout from shuttered Ahwatukee golf courses and community alternatives.',
   },
   {
     id: 'src-clubresort',
-    title: 'Wilson Gee Water Shutoff & HOA Countersuit Coverage (2016)',
+    title: 'Club West GC Owner Countersues HOA',
     publisher: 'Club + Resort Business',
-    url: 'https://www.clubandresortbusiness.com',
-    note: 'Covers the $159,000 water bill shutoff, $100,000 payment, "hay-like appearance" allegations, and fire-sale countersuit.',
+    url: 'https://clubandresortbusiness.com/club-west-gc-owner-countersues-hoa/',
+    kind: 'News Article',
+    note: '2016 coverage of the $159K water shutoff, $100K payment, "hay-like appearance" claims, and "$10 fire sale" countersuit.',
   },
   {
-    id: 'src-ccr-analysis',
-    title: 'Foothills Club West 1989 Master CC&Rs & 1993 Golf Declaration Analysis',
-    publisher: 'Savvy Realty AZ / Public Covenant Records',
-    url: 'https://www.savvyrealtyaz.com',
-    note: 'Details 1989 Master CC&Rs (75% vote), 1993 Golf Declaration, 2010 Assignment, 2018–2019 amendments, and Judge Kiley / Judge Pineda rulings.',
+    id: 'src-savvy-blog',
+    title: 'Ahwatukee Golf Courses: What Is Happening',
+    publisher: 'Savvy Realty AZ',
+    url: 'https://www.savvyrealtyaz.com/blog/ahwatukee-golf-courses-what-is-happening',
+    kind: 'News Article',
+    note: 'Tracks Club West vs. nearby Ahwatukee course closures, litigation, and zoning pressures.',
+  },
+  {
+    id: 'src-savvy-area',
+    title: 'Foothills Club West Community & Tract Overview',
+    publisher: 'Savvy Realty AZ',
+    url: 'https://www.savvyrealtyaz.com/areas/foothills-club-west',
+    kind: 'Public Archive',
+    note: 'Details Foothills Club West sub-associations, tract structure, and HOA transitions.',
+  },
+  {
+    id: 'src-ccr-pdf',
+    title: 'Foothills Club West Master Declaration of CC&Rs (Doc #89-337438, July 21, 1989)',
+    publisher: 'Vision Community Management / Maricopa Recorder',
+    url: 'https://www.visioncommunitymanagement.com/media/vcmdocs/500828.pdf?6ada46d142d88',
+    waybackUrl:
+      'https://web.archive.org/web/20240616145328/https://www.visioncommunitymanagement.com/media/vcmdocs/500828.pdf',
+    kind: 'HOA Covenant / PDF',
+    note: 'Primary recorded 1989 Master CC&Rs establishing the 75% supermajority amendment threshold.',
+  },
+  {
+    id: 'src-golf-dec-pdf',
+    title: 'Foothills Club West Golf Course Declaration (PDF)',
+    publisher: 'Vision Community Management / Maricopa Recorder',
+    url: 'https://www.visioncommunitymanagement.com/media/vcmdocs/954973.pdf?63229b581f3e0',
+    waybackUrl:
+      'https://web.archive.org/web/20240802175536/https://www.visioncommunitymanagement.com/media/vcmdocs/954973.pdf',
+    kind: 'HOA Covenant / PDF',
+    note: 'Recorded Golf Course Declaration restricting the 162-acre parcel to golf, driving range & clubhouse.',
+  },
+  {
+    id: 'src-arch-pdf',
+    title: 'Foothills Club West Revised Architectural & Landscaping Guidelines (Jan 26, 2022)',
+    publisher: 'Vision Community Management',
+    url: 'https://visioncommunitymanagement.com/images/surveymonkey/FCW%20Revised%20Guidelines%202022-01-26.pdf',
+    kind: 'HOA Covenant / PDF',
+    note: 'Governs exterior modifications, wash/golf-facing lot rules, and front-yard minimums.',
+  },
+  {
+    id: 'src-360-portal',
+    title: 'Foothills Club West Community Association Portal',
+    publisher: '360 Community Management, LLC',
+    url: 'https://www.360propertymgt.com/community/foothills-club-west-community-association/',
+    waybackUrl:
+      'https://web.archive.org/web/20260619065059/https://www.360propertymgt.com/community/foothills-club-west-community-association/',
+    kind: 'HOA Covenant / PDF',
+    note: 'Current HOA management portal replacing Vision Community Management.',
+  },
+  {
+    id: 'src-azhoawatch',
+    title: 'CV2020-003577 Court Case Archive (Club West Conservancy v. Foothills Club West HOA)',
+    publisher: 'AZ HOA Watch',
+    url: 'https://azhoawatch.org/court-cases/',
+    waybackUrl: 'https://web.archive.org/web/20260614135722/https://azhoawatch.org/court-cases/',
+    kind: 'Court Filing / Opinion',
+    note: 'Tracks Judge Daniel J. Kiley’s injunction and summary judgment voiding 2010/2018/2019 board actions.',
+  },
+  {
+    id: 'src-azhoawatch-oral-2020',
+    title: 'CV2020-003577 Oral Argument Transcript PDF (June 22, 2020)',
+    publisher: 'AZ HOA Watch Court Downloads',
+    url: 'https://azhoawatch.org/wp-content/uploads/azhoawatch/court-case-downloads/club-west-conservancy-v-foothills-club-west-community-association/raw/2020-06-22_003_oral-argument.pdf',
+    kind: 'Court Filing / Opinion',
+    note: 'Full Superior Court oral argument filing in Club West Conservancy v. Foothills Club West HOA.',
+  },
+  {
+    id: 'src-azhoawatch-oral-2021',
+    title: 'CV2020-003577 Oral Argument Transcript PDF (January 22, 2021)',
+    publisher: 'AZ HOA Watch Court Downloads',
+    url: 'https://azhoawatch.org/wp-content/uploads/azhoawatch/court-case-downloads/club-west-conservancy-v-foothills-club-west-community-association/raw/2021-01-22_014_oral-argument.pdf',
+    kind: 'Court Filing / Opinion',
+    note: 'Summary judgment oral argument PDF in CV2020-003577.',
+  },
+  {
+    id: 'src-omlaw-petition',
+    title: 'Petition for Special Action PDF — Club West Conservancy v. Shea Homes / The Edge (May 1, 2025)',
+    publisher: 'Osborn Maledon (CV2021-018435 / 1 CA-SA 25-0117)',
+    url: 'https://www.omlaw.com/wp-content/uploads/2025-05-01-Club-West-Shea-Petition-for-Special-Action.pdf',
+    waybackUrl:
+      'https://web.archive.org/web/20260216032008/https://www.omlaw.com/wp-content/uploads/2025-05-01-Club-West-Shea-Petition-for-Special-Action.pdf',
+    kind: 'Court Filing / Opinion',
+    note: 'Complete appellate special action petition filed from Maricopa County Case CV2021-018435.',
+  },
+  {
+    id: 'src-justia-opinion',
+    title: 'Club West Conservancy v. Shea Homes LP, et al., No. 1 CA-SA 25-0117 (Oct 27, 2025)',
+    publisher: 'Arizona Court of Appeals Div. One (Justia)',
+    url: 'https://law.justia.com/cases/arizona/court-of-appeals-division-one-published/2025/1-ca-sa-25-0117.html',
+    kind: 'Court Filing / Opinion',
+    note: 'Published appellate decision by Presiding Judge Catlett addressing Rule 54(b) & fee awards.',
+  },
+  {
+    id: 'src-findlaw-opinion',
+    title: 'Club West Conservancy v. Shea Homes LP, et al. — Published Opinion Mirror',
+    publisher: 'Arizona Court of Appeals Div. One (FindLaw)',
+    url: 'https://caselaw.findlaw.com/court/az-court-of-appeals/117877870.html',
+    kind: 'Court Filing / Opinion',
+    note: 'Full text of the October 27, 2025 Court of Appeals special action opinion.',
+  },
+  {
+    id: 'src-maricopa-minutes',
+    title: 'AZ Courts Public Access — Maricopa Minute Entries (CV2020-003577 & CV2021-018435)',
+    publisher: 'Arizona Judicial Branch Public Access',
+    url: 'https://apps.azcourts.gov/publicaccess/minutes.aspx',
+    kind: 'Court Filing / Opinion',
+    note: 'Official portal to pull minute entries for CV2020-003577 (Judge Kiley) and CV2021-018435 (Judge Pineda).',
   },
   {
     id: 'src-golfpass',
-    title: 'Club West Golf Club Course Profile (1993)',
-    publisher: 'GolfPass / Course Architecture Records',
-    url: 'https://www.golfpass.com',
-    note: 'Confirms 1993 opening, par-72 layout, and architects Brian Whitcomb & Ken Kavanaugh.',
+    title: 'Club West Golf Club Course Profile (1993 Architecture)',
+    publisher: 'GolfPass',
+    url: 'https://www.golfpass.com/travel-advisor/courses/15697-club-west-golf-club',
+    waybackUrl:
+      'https://web.archive.org/web/20250328112134/https://www.golfpass.com/travel-advisor/courses/15697-club-west-golf-club',
+    kind: 'Public Archive',
+    note: 'Archived course specs confirming 1993 opening, par-72 layout, and architects Brian Whitcomb & Ken Kavanaugh.',
+  },
+  {
+    id: 'src-issuu-afn',
+    title: 'Ahwatukee Foothills News Digital Archive Editions (Issuu)',
+    publisher: 'Times Media Group / Ahwatukee Foothills News',
+    url: 'https://issuu.com/timespub/docs/afn_1215_book',
+    waybackUrl: 'https://web.archive.org/web/20230305021908/https://issuu.com/timespub/docs/afn_1215_book',
+    kind: 'Public Archive',
+    note: 'Archived print edition preserving historical Ahwatukee Club West reporting.',
   },
 ];

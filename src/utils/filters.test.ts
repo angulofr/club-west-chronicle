@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { PROPOSALS, TIMELINE_EVENTS } from '../data/clubWestData';
+import { HOA_DOCUMENTS, LEGAL_DOCKETS, PROPOSALS, SOURCES, TIMELINE_EVENTS } from '../data/clubWestData';
 import { calculateDensityReductionPercent, filterTimelineEvents } from './filters';
 
 describe('filterTimelineEvents', () => {
@@ -28,5 +28,19 @@ describe('calculateDensityReductionPercent', () => {
     const horton = PROPOSALS.find((p) => p.id === 'prop-drhorton')!;
     const sekisui = PROPOSALS.find((p) => p.id === 'prop-sekisui')!;
     expect(calculateDensityReductionPercent(horton, sekisui)).toBe(51.5);
+  });
+});
+
+describe('source and document citation integrity', () => {
+  it('ensures every source links to a deep article, PDF, or filing rather than a bare domain homepage', () => {
+    for (const src of SOURCES) {
+      const parsed = new URL(src.url);
+      expect(parsed.pathname.length).toBeGreaterThan(1);
+    }
+  });
+
+  it('ensures all HOA documents and legal dockets include direct document or portal links', () => {
+    expect(HOA_DOCUMENTS.every((doc) => doc.links.length > 0)).toBe(true);
+    expect(LEGAL_DOCKETS.every((docket) => docket.links.length > 0)).toBe(true);
   });
 });

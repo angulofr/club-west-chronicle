@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Building2, ExternalLink, FileText, Gavel, Mail, Phone } from 'lucide-react';
+import { Archive, Building2, ExternalLink, FileText, Gavel, Mail, Phone } from 'lucide-react';
 import { HOA_DOCUMENTS, LEGAL_DOCKETS, PARCEL_METADATA } from '../data/clubWestData';
 
 export function LegalAndHoaVault() {
@@ -67,8 +67,17 @@ export function LegalAndHoaVault() {
             rel="noreferrer"
             className="hoa-portal-btn"
           >
-            <span>Open 360 Management Portal</span>
-            <ExternalLink size={14} />
+            <Archive size={14} />
+            <span>360 Portal (Wayback)</span>
+          </a>
+          <a
+            href={PARCEL_METADATA.hoaPortalLiveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="hoa-contact-chip"
+          >
+            <span>Live Portal</span>
+            <ExternalLink size={13} />
           </a>
         </div>
       </div>
@@ -98,6 +107,11 @@ export function LegalAndHoaVault() {
                     </span>
                   </div>
                   <h4>{doc.title}</h4>
+                  {doc.recorderRef && (
+                    <p className="vault-meta">
+                      <strong>Recorder Ref:</strong> <span className="mono-tag">{doc.recorderRef}</span>
+                    </p>
+                  )}
                   <p className="vault-meta">
                     <strong>Authority:</strong> {doc.authority}
                   </p>
@@ -105,6 +119,23 @@ export function LegalAndHoaVault() {
                     <strong>Rule / Threshold:</strong> {doc.thresholdOrRule}
                   </p>
                   <p className="vault-desc">{doc.significance}</p>
+
+                  {doc.links.length > 0 && (
+                    <div className="doc-links-row">
+                      {doc.links.map((link) => (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`doc-link-btn ${link.isWayback ? 'wayback' : ''}`}
+                        >
+                          {link.isWayback ? <Archive size={12} /> : <ExternalLink size={12} />}
+                          <span>{link.label}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </article>
               ))}
             </div>
@@ -140,6 +171,23 @@ export function LegalAndHoaVault() {
                   {docket.financialImpact && (
                     <div className="fee-callout">
                       <strong>Financial Toll:</strong> {docket.financialImpact}
+                    </div>
+                  )}
+
+                  {docket.links.length > 0 && (
+                    <div className="doc-links-row">
+                      {docket.links.map((link) => (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`doc-link-btn ${link.isWayback ? 'wayback' : ''}`}
+                        >
+                          {link.isWayback ? <Archive size={12} /> : <ExternalLink size={12} />}
+                          <span>{link.label}</span>
+                        </a>
+                      ))}
                     </div>
                   )}
                 </article>

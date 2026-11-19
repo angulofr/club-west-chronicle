@@ -45,18 +45,26 @@ export interface ProposalSpec {
   openSpaceAcres: number;
   developedAcres: number;
   grossDensityPerAcre: number;
-  highlights: string[];
   accentColor: string;
+  highlights: string[];
+}
+
+export interface DocumentLink {
+  label: string;
+  url: string;
+  isWayback?: boolean;
 }
 
 export interface HoaDocument {
   id: string;
   year: string;
   title: string;
+  recorderRef?: string;
   authority: string;
   thresholdOrRule: string;
   significance: string;
   status: 'Active / Foundational' | 'Challenged / Invalidated' | 'Disputed Mechanism';
+  links: DocumentLink[];
 }
 
 export interface LegalDocket {
@@ -69,6 +77,7 @@ export interface LegalDocket {
   outcome: string;
   coreIssues: string[];
   financialImpact?: string;
+  links: DocumentLink[];
 }
 
 export interface Stakeholder {
@@ -84,5 +93,7 @@ export interface SourceReference {
   title: string;
   publisher: string;
   url: string;
+  waybackUrl?: string;
+  kind: 'News Article' | 'Court Filing / Opinion' | 'HOA Covenant / PDF' | 'Public Archive';
   note: string;
 }

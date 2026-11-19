@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Calendar, ChevronDown, ChevronUp, ExternalLink, Search } from 'lucide-react';
+import { Archive, Calendar, ChevronDown, ChevronUp, ExternalLink, Search } from 'lucide-react';
 import { ERAS, SOURCES, TIMELINE_EVENTS } from '../data/clubWestData';
 import { EraId, EventCategory } from '../types/clubWest';
 import { filterTimelineEvents } from '../utils/filters';
@@ -174,13 +174,17 @@ export function TimelineSection() {
                             {eventSources.map((src) => (
                               <a
                                 key={src.id}
-                                href={src.url}
+                                href={src.waybackUrl ?? src.url}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="source-chip"
+                                title={src.title}
                               >
-                                <span>{src.publisher}</span>
-                                <ExternalLink size={12} />
+                                {src.waybackUrl ? <Archive size={12} /> : <ExternalLink size={12} />}
+                                <span>
+                                  {src.publisher}
+                                  {src.waybackUrl ? ' (Wayback)' : ''}
+                                </span>
                               </a>
                             ))}
                           </div>
