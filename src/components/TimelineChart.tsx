@@ -46,11 +46,11 @@ const CHART_NODES: ChartNode[] = [
     x: 285,
     year: '2016',
     label: 'Water Crisis',
-    metric: '$159K Shutoff',
+    metric: '$700K/yr Water',
     era: 'water',
     yValue: 170,
     summary:
-      'Reclamation plant closure forced costly potable city water. Water briefly shut off over ~$159K bill; HOA & Wilson Gee trade lawsuits.',
+      'Reclamation plant closure drove annual potable water bills to $700K/yr (vs. ~$107K benchmark). Gee proposed $10/mo HOA dues (~$24K/mo) before ~$159K shutoff & lawsuits.',
     docLabel: 'Club + Resort Business Report',
     docUrl: 'https://clubandresortbusiness.com/club-west-gc-owner-countersues-hoa/',
   },
