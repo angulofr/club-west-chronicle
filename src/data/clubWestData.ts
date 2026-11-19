@@ -1,0 +1,725 @@
+import {
+  TimelineEvent,
+  OwnershipNode,
+  ProposalSpec,
+  HoaDocument,
+  LegalDocket,
+  Stakeholder,
+  SourceReference,
+  EraId,
+} from '../types/clubWest';
+
+export const PARCEL_METADATA = {
+  name: 'Club West Golf Club (Foothills Club West)',
+  address: '16400 S. 14th Ave, Phoenix, AZ 85045',
+  clubhouseAddress: '16414 S. 14th Ave, Phoenix, AZ 85045',
+  village: 'Ahwatukee Foothills Village (City of Phoenix)',
+  totalAcres: 162,
+  holes: 18,
+  par: 72,
+  architects: 'Brian Whitcomb & Ken Kavanaugh',
+  openedYear: 1993,
+  hoaName: 'Foothills Club West Community Association',
+  hoaManagement: '360 Community Management, LLC (formerly Vision Community Management)',
+  hoaContactEmail: 'clubwest@360communitymgmt.com',
+  hoaPhone: '602-863-3600',
+  hoaPortalUrl: 'https://www.360propertymgt.com/community/foothills-club-west-community-association/',
+};
+
+export const ERAS: { id: EraId | 'all'; label: string; years: string; description: string }[] = [
+  {
+    id: 'all',
+    label: 'Complete Saga',
+    years: '1989–2026',
+    description: 'Full 37-year arc from master-plan covenants to Sekisui House’s 278-home proposal.',
+  },
+  {
+    id: 'founding',
+    label: 'Founding & Covenants',
+    years: '1989–2010',
+    description: 'Master CC&Rs, 1993 championship course opening, and declarant-right transfers.',
+  },
+  {
+    id: 'water-crisis',
+    label: 'Water Crisis & Closure',
+    years: '2013–2018',
+    description: 'Reclaimed water loss, potable city water bills, HOA feuds, and final shuttering.',
+  },
+  {
+    id: 'legal-battles',
+    label: 'HOA & Court Warfare',
+    years: '2018–2025',
+    description: 'Closed-door amendments, Club West Conservancy lawsuits, and appellate rulings.',
+  },
+  {
+    id: 'redevelopment',
+    label: 'Flips & Homebuilders',
+    years: '2026',
+    description: 'Community Harmony Coalition flip, D.R. Horton (573 homes), and Sekisui House (278 homes).',
+  },
+];
+
+export const OWNERSHIP_FLOW: OwnershipNode[] = [
+  {
+    id: 'shea-founding',
+    step: 1,
+    period: '1989 – 1993',
+    owner: 'Master Developer / Shea Homes',
+    entityDetails: 'Original Foothills Club West master-planned developer (Shea Homes / UDC Homes lineage).',
+    transactionPrice: 'Master-Planned Entitlement',
+    landStatus: 'Dedicated Golf & Open Space',
+    tone: 'emerald',
+    highlights: [
+      '1989 Master CC&Rs recorded requiring 75% member vote for major amendments.',
+      '1993 Golf Course Declaration restricted parcel to golf, driving range & clubhouse.',
+      '18-hole par-72 course designed by Brian Whitcomb & Ken Kavanaugh opened in 1993.',
+    ],
+  },
+  {
+    id: 'wilson-gee',
+    step: 2,
+    period: 'Pre-2016 – May 2020',
+    owner: 'Wilson Gee (Kwang Co. / Hiro Investment)',
+    entityDetails: 'Golf course owner/investor operating multiple Ahwatukee courses.',
+    transactionPrice: 'Private Ownership Era',
+    landStatus: 'Closed (2016) · Brief Revival (Late 2017–Feb 2018) · Barren',
+    tone: 'amber',
+    highlights: [
+      'Shutdown of local water reclamation facility forced costly potable City of Phoenix drinking water.',
+      '2016 water shutoff over ~$159K delinquency ($100K paid); course closed amid HOA lawsuits.',
+      'Separate operator revived turf late 2017–Feb 2018 before going broke over $200K+ water bills.',
+    ],
+  },
+  {
+    id: 'the-edge',
+    step: 3,
+    period: 'June 1, 2020 – May 2026',
+    owner: 'The Edge at Club West LLC',
+    entityDetails: 'Redevelopment buyer acquiring the shuttered 162-acre parcel from Gee’s entities.',
+    transactionPrice: '$750,000',
+    landStatus: 'Litigated (CV2021-018435 & 1 CA-SA 25-0117) · Cleared for Alternative Use',
+    tone: 'terracotta',
+    highlights: [
+      'Purchased shuttered course & clubhouse for $750,000 on June 1, 2020.',
+      'Fought 4+ years of litigation against Club West Conservancy over perpetual golf covenants.',
+      'Court rulings established owner is not permanently bound to keep land as a golf course.',
+    ],
+  },
+  {
+    id: 'harmony-coalition',
+    step: 4,
+    period: 'May 29, 2026 – Present',
+    owner: 'Community Harmony Coalition LLC',
+    entityDetails: '15-investor coalition that acquired the cleared parcel and retained Nathan & Associates.',
+    transactionPrice: '$2.1 Million',
+    landStatus: 'Marketed for Residential Redevelopment (2.8× 2020 Price)',
+    tone: 'slate',
+    highlights: [
+      'Acquired 162 acres + clubhouse from The Edge for $2.1M on May 29, 2026.',
+      'Placed property back on the market ~1 month later via Scottsdale brokerage Nathan & Associates Inc.',
+      'Fielded competing builder pre-applications with City of Phoenix Planning & Development.',
+    ],
+  },
+  {
+    id: 'builder-proposals',
+    step: 5,
+    period: 'Mid – Nov 2026',
+    owner: 'Builder Pre-Apps: D.R. Horton vs. Sekisui House',
+    entityDetails: 'Active City of Phoenix Planning & Development pre-application phase (no final rezoning yet).',
+    transactionPrice: 'Pending Builder Acquisition & Rezoning',
+    landStatus: 'D.R. Horton (573 Homes) → Sekisui House (278 Homes / 88.5 Ac Open Space)',
+    tone: 'cobalt',
+    highlights: [
+      'D.R. Horton filed pre-application for 573 homes (~3.54 DU/ac), sparking density concerns.',
+      'Nov 2026: Japanese builder Sekisui House Ltd. filed pre-app for 278 single-family homes.',
+      'Sekisui plan preserves 88.5 acres (54.6%) as amenitized/passive open space & drainage.',
+    ],
+  },
+];
+
+export const TIMELINE_EVENTS: TimelineEvent[] = [
+  {
+    id: 'evt-1989-ccrs',
+    dateLabel: '1989',
+    sortOrder: 198901,
+    era: 'founding',
+    category: 'Founding & Covenants',
+    title: 'Master CC&Rs Recorded for Foothills Club West',
+    subtitle: 'Foundational community governance with 75% supermajority protection',
+    summary:
+      'The original master developer recorded the Master Declaration of Covenants, Conditions, and Restrictions (CC&Rs) with Maricopa County for Foothills Club West, establishing neighborhood tract rules and high amendment thresholds.',
+    details: [
+      'Structured developer declarant rights alongside individual residential Tract Declarations.',
+      'Required a strict 75% supermajority member vote for substantive amendments to the master covenants.',
+      'Later became the decisive legal benchmark when homeowners challenged 2018–2019 HOA board maneuvers.',
+    ],
+    keyFigures: ['Shea Homes / UDC Homes', 'Maricopa County Recorder'],
+    metrics: [{ label: 'Amendment Threshold', value: '75% Supermajority' }],
+    sourceIds: ['src-hoawatch', 'src-ccr-analysis'],
+  },
+  {
+    id: 'evt-1993-opening',
+    dateLabel: '1993',
+    sortOrder: 199301,
+    era: 'founding',
+    category: 'Founding & Covenants',
+    title: 'Club West Golf Club Opens & Golf Course Declaration Recorded',
+    subtitle: '162-acre, 18-hole championship desert course opens in Ahwatukee',
+    summary:
+      'Designed by golf course architects Brian Whitcomb and Ken Kavanaugh, the 18-hole, par-72 Club West Golf Club opened in 1993 alongside a recorded Golf Course Declaration restricting the land to golf and clubhouse uses.',
+    details: [
+      'Built as the centerpiece recreational and visual greenbelt amenity for Foothills Club West homeowners.',
+      'The separate 1993 Golf Course Declaration explicitly restricted the property to a golf course, driving range, and related clubhouse/recreational facilities.',
+      'Adjacent premium lots were marketed and sold around fairway views and open-space corridors.',
+    ],
+    keyFigures: ['Brian Whitcomb', 'Ken Kavanaugh', 'Shea Homes'],
+    metrics: [
+      { label: 'Course Acreage', value: '162 Acres' },
+      { label: 'Layout', value: '18 Holes · Par 72' },
+    ],
+    sourceIds: ['src-golfpass', 'src-ccr-analysis'],
+  },
+  {
+    id: 'evt-2010-declarant',
+    dateLabel: 'September 2010',
+    sortOrder: 201009,
+    era: 'founding',
+    category: 'HOA & Governance',
+    title: 'Assignment of Declarant Rights to the HOA Board',
+    subtitle: 'Shea Homes transfers developer-era declarant rights to Foothills Club West HOA',
+    summary:
+      'In September 2010, the Foothills Club West Community Association executed and recorded an Assignment of Declarant Rights stepping into the shoes of original developer Shea Homes.',
+    details: [
+      'Intended at the time to wrap up developer transition control within the mature community.',
+      'A decade later in CV2020-003577, homeowners argued the HOA board improperly leveraged those declarant rights to bypass member supermajority protections.',
+    ],
+    keyFigures: ['Foothills Club West HOA', 'Shea Homes'],
+    sourceIds: ['src-ccr-analysis', 'src-hoawatch'],
+  },
+  {
+    id: 'evt-2016-water-crisis',
+    dateLabel: '2016',
+    sortOrder: 201606,
+    era: 'water-crisis',
+    category: 'Water & Operations',
+    title: 'Water Shutoff, HOA Lawsuits & First Course Closure',
+    subtitle: 'Loss of reclaimed gray water triggers $159K water dispute and bitter litigation',
+    summary:
+      'After a local water reclamation plant shut down, owner Wilson Gee was forced to irrigate 162 acres with expensive potable Phoenix city drinking water. Facing ~$159,000 in delinquent water bills, the city briefly cut water before Gee paid $100,000—amid dueling lawsuits with the HOA—and the course closed in 2016.',
+    details: [
+      'Recycled gray water was no longer reliably available, sending irrigation costs soaring toward hundreds of thousands of dollars annually.',
+      'The Foothills Club West HOA sued Gee alleging intentional neglect and a "hay-like appearance" violating CC&Rs requiring first-class maintenance.',
+      'Gee countersued, accusing the HOA and local officials of conspiring to depress the course’s market value and force a "fire sale" (citing an offer as low as $10).',
+    ],
+    keyFigures: ['Wilson Gee (Kwang Co. / Hiro Investment)', 'Foothills Club West HOA', 'City of Phoenix'],
+    metrics: [
+      { label: 'Delinquent Water Bill', value: '~$159,000' },
+      { label: 'Restoration Payment', value: '$100,000' },
+    ],
+    sourceIds: ['src-clubresort', 'src-kennard'],
+  },
+  {
+    id: 'evt-2017-revival',
+    dateLabel: 'Late 2017 – Feb 2018',
+    sortOrder: 201802,
+    era: 'water-crisis',
+    category: 'Water & Operations',
+    title: 'Brief Revival Ends After Water Bills Top $200,000',
+    subtitle: 'Short-lived operator restores turf before potable water economics force final shutdown',
+    summary:
+      'A subsequent golf operator leased and reopened Club West in late 2017, briefly bringing fairways and greens back to lush condition. By February 2018, city potable water bills topped $200,000, bankrupting the revival and closing the course permanently.',
+    details: [
+      'Demonstrated to both residents and investors that traditional 18-hole irrigation using Phoenix municipal drinking water was financially unviable.',
+      'Following the February 2018 shutdown, the 162-acre corridor dried out completely and sat barren for years.',
+    ],
+    keyFigures: ['Interim Golf Operator', 'City of Phoenix Water Services'],
+    metrics: [{ label: 'Cumulative Water Bills', value: '$200,000+' }],
+    sourceIds: ['src-kennard'],
+  },
+  {
+    id: 'evt-2018-amendment',
+    dateLabel: 'Oct 2018 – 2019',
+    sortOrder: 201810,
+    era: 'legal-battles',
+    category: 'HOA & Governance',
+    title: 'HOA Board Executes Closed-Session Golf Declaration Amendments',
+    subtitle: 'Attempt to lower non-golf conversion threshold from 75% to majority of 31% quorum',
+    summary:
+      'In October 2018 and into 2019, the Foothills Club West HOA board met in closed executive sessions and enacted a First Amendment to the 1993 Golf Course Declaration to create an easier path away from golf use.',
+    details: [
+      'Created a mechanism allowing conversion to non-golf uses via a simple majority vote of a 31% member quorum rather than the Master CC&Rs’ 75% supermajority.',
+      'Sparked intense homeowner backlash over transparency, Arizona HOA open-meeting rules, and board authority.',
+    ],
+    keyFigures: ['Foothills Club West HOA Board', 'Vision Community Management'],
+    metrics: [
+      { label: 'Master CC&R Rule', value: '75% Supermajority' },
+      { label: 'Board Amendment Rule', value: 'Majority of 31% Quorum' },
+    ],
+    sourceIds: ['src-ccr-analysis', 'src-savvy'],
+  },
+  {
+    id: 'evt-2020-edge-sale',
+    dateLabel: 'June 1, 2020',
+    sortOrder: 202006,
+    era: 'legal-battles',
+    category: 'Sales & Builders',
+    title: 'The Edge at Club West LLC Buys Shuttered Course for $750,000',
+    subtitle: 'Redevelopment entity acquires 162 acres from Wilson Gee’s ownership group',
+    summary:
+      'On June 1, 2020, The Edge at Club West LLC purchased the 162-acre defunct golf course and clubhouse from Wilson Gee’s entities (Kwang Co. LLC / Hiro Investment LLC) for $750,000, setting the stage for residential redevelopment proposals.',
+    details: [
+      'Price reflected heavily distressed value (~$4,630 per acre) due to perpetual golf-use covenant uncertainty and dead turf.',
+      'The Edge explored residential development plans, immediately mobilizing neighborhood opposition.',
+    ],
+    keyFigures: ['The Edge at Club West LLC', 'Wilson Gee'],
+    metrics: [
+      { label: 'Sale Price', value: '$750,000' },
+      { label: 'Implied Price / Acre', value: '~$4,630/ac' },
+    ],
+    sourceIds: ['src-ktar', 'src-kennard'],
+  },
+  {
+    id: 'evt-2020-conservancy-hoa-suit',
+    dateLabel: 'December 2020',
+    sortOrder: 202012,
+    era: 'legal-battles',
+    category: 'Litigation & Appeals',
+    title: 'Conservancy Sues HOA Over Secret Amendments (CV2020-003577)',
+    subtitle: 'Judge Daniel J. Kiley invalidates HOA board’s 2018–2019 governance maneuvers',
+    summary:
+      'Homeowner nonprofit Club West Conservancy filed CV2020-003577 against the Foothills Club West Community Association. Maricopa County Superior Court Judge Daniel J. Kiley granted injunctive and summary-judgment relief dismantling the board’s unauthorized amendments.',
+    details: [
+      'Challenged closed-door executive-session voting and unilateral exercise of assigned declarant rights to sidestep the 75% Master CC&R threshold.',
+      'Judge Kiley affirmed adjacent homeowners’ representational standing and ruled that "good intentions cannot supersede the dictates of the master [covenants]."',
+    ],
+    keyFigures: ['Club West Conservancy', 'Foothills Club West HOA', 'Judge Daniel J. Kiley'],
+    metrics: [{ label: 'Docket', value: 'CV2020-003577' }],
+    sourceIds: ['src-ccr-analysis', 'src-hoawatch'],
+  },
+  {
+    id: 'evt-2021-edge-suit',
+    dateLabel: 'Late 2021 – Mar 2024',
+    sortOrder: 202403,
+    era: 'legal-battles',
+    category: 'Litigation & Appeals',
+    title: 'Multi-Year Developer Litigation Clears Land Use (CV2021-018435)',
+    subtitle: 'Courts rule property owners are not legally forced to operate golf in perpetuity',
+    summary:
+      'In CV2021-018435 (Club West Conservancy v. Shea Homes LP & The Edge at Club West LLC), Maricopa County Superior Court judges—including Judge Susanna C. Pineda—ruled against the Conservancy’s bid to lock the 162 acres permanently as a golf course, entering final judgment milestones around March 13.',
+    details: [
+      'Spanning over four years of motions, standing challenges, and indemnification disputes.',
+      'Cleared the overarching title/use cloud by confirming owners may pursue alternative uses subject to City of Phoenix zoning and General Plan rules.',
+      'Left the Conservancy facing heavy attorney-fee awards reported up to $1.07 million.',
+    ],
+    keyFigures: ['The Edge at Club West LLC', 'Shea Homes LP', 'Club West Conservancy', 'Judge Susanna C. Pineda'],
+    metrics: [
+      { label: 'Docket', value: 'CV2021-018435' },
+      { label: 'Reported Fee Toll', value: '~$1.07M' },
+    ],
+    sourceIds: ['src-kennard', 'src-savvy', 'src-justia'],
+  },
+  {
+    id: 'evt-2025-appeals',
+    dateLabel: 'October 27, 2025',
+    sortOrder: 202510,
+    era: 'legal-battles',
+    category: 'Litigation & Appeals',
+    title: 'Arizona Court of Appeals Special Action Ruling (1 CA-SA 25-0117)',
+    subtitle: 'Appellate panel clarifies Rule 54(b) & attorney-fee timelines without restoring golf mandate',
+    summary:
+      'In a published special action opinion filed October 27, 2025, the Arizona Court of Appeals (Division One) granted procedural relief on how trial courts enter sua sponte Rule 54(b) partial final judgments alongside pending attorney-fee motions, while leaving the core redevelopment clearance intact.',
+    details: [
+      'Opinion delivered by Presiding Judge Michael S. Catlett, joined by Chief Judge Randall M. Howe and Judge D. Steven Williams.',
+      'Clarified interplay between Arizona Rules of Civil Procedure 54(b), 54(g)(3), and 54(h) for partial judgments and fee deadlines.',
+      'Post-judgment fee and finality matters continued into early 2026.',
+    ],
+    keyFigures: ['Presiding Judge Michael S. Catlett', 'Club West Conservancy', 'Shea Homes LP', 'The Edge at Club West LLC'],
+    metrics: [{ label: 'Appellate Docket', value: '1 CA-SA 25-0117' }],
+    sourceIds: ['src-justia'],
+  },
+  {
+    id: 'evt-2026-harmony-flip',
+    dateLabel: 'May 29 – June 2026',
+    sortOrder: 202605,
+    era: 'redevelopment',
+    category: 'Sales & Builders',
+    title: 'Community Harmony Coalition Buys Site for $2.1M & Lists for Sale',
+    subtitle: '15-investor LLC acquires 162 acres from The Edge and retains Nathan & Associates',
+    summary:
+      'On May 29, 2026, a 15-investor group called Community Harmony Coalition LLC acquired the 162-acre former course and clubhouse from The Edge for $2.1 million—2.8× the 2020 price—and roughly a month later listed the parcel with Scottsdale land brokerage Nathan & Associates Inc.',
+    details: [
+      'Demonstrated immediate market repricing once the perpetual golf-course litigation risk was resolved.',
+      'Nathan & Associates solicited competitive offers from major regional and national homebuilders.',
+    ],
+    keyFigures: ['Community Harmony Coalition LLC', 'Nathan & Associates Inc.', 'The Edge at Club West LLC'],
+    metrics: [
+      { label: 'Acquisition Price', value: '$2.1 Million' },
+      { label: 'Implied Price / Acre', value: '~$12,963/ac' },
+    ],
+    sourceIds: ['src-ktar', 'src-kennard'],
+  },
+  {
+    id: 'evt-2026-dr-horton',
+    dateLabel: 'Summer 2026',
+    sortOrder: 202608,
+    era: 'redevelopment',
+    category: 'Sales & Builders',
+    title: 'D.R. Horton Floats 573-Home Pre-Application Concept',
+    subtitle: 'High-density layout (~3.54 homes/acre) triggers neighborhood concern over traffic & density',
+    summary:
+      'National volume builder D.R. Horton—already developing nearby Upper Canyon on 373 acres of former State Trust Land west of Club West—filed pre-application paperwork with the City of Phoenix Planning and Development Department eyeing roughly 573 single-family homes across the 162-acre site.',
+    details: [
+      'Represented roughly triple the density of earlier conceptual developer layouts floated during The Edge era.',
+      'Ahwatukee residents raised alarms over traffic, school capacity, drainage, and loss of open space.',
+    ],
+    keyFigures: ['D.R. Horton', 'Phoenix Planning & Development Dept.'],
+    metrics: [
+      { label: 'Proposed Units', value: '573 Homes' },
+      { label: 'Gross Density', value: '3.54 DU / Acre' },
+    ],
+    sourceIds: ['src-kennard', 'src-savvy'],
+  },
+  {
+    id: 'evt-2026-sekisui-house',
+    dateLabel: 'November 2026',
+    sortOrder: 202611,
+    era: 'redevelopment',
+    category: 'Sales & Builders',
+    title: 'Sekisui House Files Lower-Density Pre-App: 278 Homes & 88.5 Acres Open Space',
+    subtitle: 'Japanese homebuilder slashes proposed home count by 51.5% compared to D.R. Horton concept',
+    summary:
+      'As reported by Ahwatukee Foothills News executive editor Paul Maryniak, Japanese homebuilder Sekisui House Ltd.—the world’s largest homebuilder—submitted a new pre-application to the Phoenix Planning and Development Department proposing 278 single-family homes while preserving 88.5 acres of open space and drainage.',
+    details: [
+      'Cuts proposed residential unit count by 295 homes (-51.5%) relative to D.R. Horton’s 573-home pre-application.',
+      'Dedicates 88.5 of the 162 acres (54.6% of the entire site) to a mix of amenitized open space, passive open space, and drainage areas.',
+      'Pre-application is an early municipal step; any development still requires formal City of Phoenix rezoning, General Plan review, and public hearings.',
+    ],
+    keyFigures: ['Sekisui House Ltd.', 'Paul Maryniak (Ahwatukee Foothills News)', 'Phoenix Planning & Development Dept.'],
+    metrics: [
+      { label: 'Proposed Units', value: '278 Single-Family Homes' },
+      { label: 'Preserved Open Space', value: '88.5 Acres (54.6%)' },
+      { label: 'Gross Density', value: '1.72 DU / Acre' },
+    ],
+    sourceIds: ['src-ahwatukee-sekisui', 'src-5amphoenix'],
+  },
+];
+
+export const PROPOSALS: ProposalSpec[] = [
+  {
+    id: 'prop-1993',
+    name: 'Original Championship Golf Course',
+    proponent: 'Shea Homes / Whitcomb & Kavanaugh',
+    timeframe: '1993 – 2018',
+    status: 'Closed Permanently (Feb 2018)',
+    totalAcres: 162,
+    homesCount: 0,
+    openSpaceAcres: 162,
+    developedAcres: 0,
+    grossDensityPerAcre: 0,
+    accentColor: '#1F4E3D',
+    highlights: [
+      '18-hole, par-72 desert championship layout + clubhouse at 16400 S. 14th Ave.',
+      'Protected by 1993 Golf Course Declaration until water costs forced shutdown.',
+      'Required costly potable City of Phoenix drinking water after reclamation plant closed.',
+    ],
+  },
+  {
+    id: 'prop-drhorton',
+    name: 'High-Density Residential Concept',
+    proponent: 'D.R. Horton',
+    timeframe: 'Mid-2026 Pre-App',
+    status: 'Superseded / Exploratory Pre-App',
+    totalAcres: 162,
+    homesCount: 573,
+    openSpaceAcres: 0,
+    developedAcres: 162,
+    grossDensityPerAcre: 3.54,
+    accentColor: '#B85335',
+    highlights: [
+      'Conceptual layout submitted to Phoenix Planning & Development for 573 homes.',
+      'Highest-density scenario floated for the corridor (~3.54 dwelling units/acre gross).',
+      'Faced heavy community pushback alongside D.R. Horton’s nearby 373-acre Upper Canyon project.',
+    ],
+  },
+  {
+    id: 'prop-sekisui',
+    name: 'Lower-Density Open-Space Concept',
+    proponent: 'Sekisui House Ltd.',
+    timeframe: 'Nov 2026 Pre-App',
+    status: 'Active City Pre-Application',
+    totalAcres: 162,
+    homesCount: 278,
+    openSpaceAcres: 88.5,
+    developedAcres: 73.5,
+    grossDensityPerAcre: 1.72,
+    accentColor: '#2B6CB0',
+    highlights: [
+      '278 single-family homes — 295 fewer homes (-51.5%) than D.R. Horton’s concept.',
+      '88.5 acres (54.6% of site) set aside for amenitized open space, passive open space & drainage.',
+      'Leaves ~73.5 acres for residential lots and internal street infrastructure (~1.72 DU/ac gross).',
+    ],
+  },
+];
+
+export const HOA_DOCUMENTS: HoaDocument[] = [
+  {
+    id: 'doc-1989-ccr',
+    year: '1989',
+    title: 'Master Declaration of CC&Rs (Foothills Club West)',
+    authority: 'Original Master Developer (Shea / UDC Homes)',
+    thresholdOrRule: '75% Supermajority Member Vote for Major Amendments',
+    significance:
+      'Foundational governing covenant for Foothills Club West and its sub-association Tract Declarations. Establishes architectural rules, assessments, and the 75% homeowner approval barrier.',
+    status: 'Active / Foundational',
+  },
+  {
+    id: 'doc-1993-golf-dec',
+    year: '1993',
+    title: 'Golf Course Declaration',
+    authority: 'Original Developer / Recorded Maricopa County Instrument',
+    thresholdOrRule: 'Dedicated Golf, Driving Range & Clubhouse Use',
+    significance:
+      'Restricted the 162-acre golf parcel to golf and recreational clubhouse operations, serving as the cornerstone of homeowners’ preservation claims.',
+    status: 'Disputed Mechanism',
+  },
+  {
+    id: 'doc-2010-declarant',
+    year: 'Sept 2010',
+    title: 'Assignment of Declarant Rights',
+    authority: 'Shea Homes → Foothills Club West HOA Board',
+    thresholdOrRule: 'Board Acceptance of Developer Transition Rights',
+    significance:
+      'Transferred remaining developer declarant rights to the HOA board; later scrutinized in CV2020-003577 when the board sought to alter golf restrictions without a 75% homeowner vote.',
+    status: 'Challenged / Invalidated',
+  },
+  {
+    id: 'doc-2018-amendment',
+    year: 'Oct 2018 – 2019',
+    title: 'First Amendment to Golf Course Declaration & Board Actions',
+    authority: 'Foothills Club West HOA Board (Executive Session)',
+    thresholdOrRule: 'Simple Majority of 31% Quorum (Bypass Attempt)',
+    significance:
+      'Attempted to create a lower-threshold vote to transition the course out of golf use. Blocked by Judge Daniel J. Kiley in CV2020-003577 for violating master CC&Rs and governance rules.',
+    status: 'Challenged / Invalidated',
+  },
+  {
+    id: 'doc-arch-guidelines',
+    year: 'Ongoing',
+    title: 'Architectural & Landscaping Guidelines (360 Community Management)',
+    authority: 'Foothills Club West Architectural Committee',
+    thresholdOrRule: 'Prior Approval Required for Exterior / Yard Changes',
+    significance:
+      'Governs exterior paint (even matching colors), hardscaping, front-yard plant minimums, pergolas, and shade sails via the 360 Community Management owner portal.',
+    status: 'Active / Foundational',
+  },
+];
+
+export const LEGAL_DOCKETS: LegalDocket[] = [
+  {
+    id: 'case-2016-gee',
+    caseNumber: '2016 Civil Claims',
+    court: 'Maricopa County Civil Litigation',
+    title: 'Foothills Club West HOA v. Wilson Gee (and Countersuit)',
+    filedOrDecided: '2016',
+    presidingJudges: 'Superior Court Civil Bench',
+    outcome: 'Course shuttered in 2016; ownership eventually sold to The Edge in 2020.',
+    coreIssues: [
+      'HOA alleged Gee neglected irrigation, leaving course in a "hay-like appearance" contrary to maintenance covenants.',
+      'Gee countersued alleging conspiracy between HOA and officials to depress property value and force a "$10 fire sale."',
+      'Coincided with City of Phoenix water shutoff over ~$159,000 in unpaid potable water bills ($100,000 paid to restore service).',
+    ],
+    financialImpact: '$159K delinquent water dispute; $100K partial payment',
+  },
+  {
+    id: 'case-2020-003577',
+    caseNumber: 'CV2020-003577',
+    court: 'Maricopa County Superior Court',
+    title: 'Club West Conservancy v. Foothills Club West Community Association',
+    filedOrDecided: 'Filed Dec 2020 · Injunction & Summary Judgment',
+    presidingJudges: 'Judge Daniel J. Kiley',
+    outcome: 'Conservancy prevailed against HOA board amendments.',
+    coreIssues: [
+      'Invalidated HOA board’s 2018–2019 executive-session amendments bypassing the 75% Master CC&R threshold.',
+      'Affirmed adjacent homeowners’ representational standing to enforce master covenants.',
+      'Held that "good intentions cannot supersede the dictates of the master [covenants]."',
+    ],
+  },
+  {
+    id: 'case-2021-018435',
+    caseNumber: 'CV2021-018435',
+    court: 'Maricopa County Superior Court',
+    title: 'Club West Conservancy v. Shea Homes LP, Shea Homes Inc., & The Edge at Club West LLC',
+    filedOrDecided: 'Filed Late 2021 · Major Rulings 2024–2026',
+    presidingJudges: 'Judges Timothy Thompson & Susanna C. Pineda',
+    outcome: 'Owners/developers prevailed on land-use freedom; parcel cleared for non-golf reuse.',
+    coreIssues: [
+      'Tested whether historical 1993 covenants perpetually forced private owners to maintain an active golf course.',
+      'Court ruled current property owners are not legally required to keep the 162 acres as a golf course and may pursue alternative uses.',
+      'Triggered heavy attorney-fee disputes and mid-March final judgment / fee milestones.',
+    ],
+    financialImpact: 'Reported ~$1.07M attorney-fee judgment / liability pressure on Conservancy',
+  },
+  {
+    id: 'case-2025-1casa',
+    caseNumber: '1 CA-SA 25-0117',
+    court: 'Arizona Court of Appeals (Division One)',
+    title: 'Club West Conservancy v. Shea Homes LP, et al.',
+    filedOrDecided: 'Decided October 27, 2025',
+    presidingJudges: 'Presiding Judge Michael S. Catlett, Chief Judge Randall M. Howe, Judge D. Steven Williams',
+    outcome: 'Jurisdiction accepted & procedural relief granted on Rule 54(b) / fee mechanics; land-use outcome unchanged.',
+    coreIssues: [
+      'Addressed sua sponte Rule 54(b) partial final judgments entered without resolving pending Rule 54(g)(3) & 54(h) attorney-fee claims.',
+      'Clarified appeal and fee-tracking timelines under Arizona Rules of Civil Procedure.',
+      'Did not reinstate any perpetual golf-course mandate on the 162-acre parcel.',
+    ],
+  },
+];
+
+export const STAKEHOLDERS: Stakeholder[] = [
+  {
+    id: 'stk-shea',
+    name: 'Shea Homes / UDC Homes',
+    role: 'Original Master Developer (1989–1993)',
+    category: 'Original Developer & Design',
+    description:
+      'Recorded the 1989 Master CC&Rs and 1993 Golf Course Declaration, transferred declarant rights in 2010, and was later named in CV2021-018435.',
+  },
+  {
+    id: 'stk-architects',
+    name: 'Brian Whitcomb & Ken Kavanaugh',
+    role: 'Course Architects (1993)',
+    category: 'Original Developer & Design',
+    description:
+      'Designed the 18-hole, par-72 desert championship golf layout spanning 162 acres through Foothills Club West.',
+  },
+  {
+    id: 'stk-gee',
+    name: 'Wilson Gee (Kwang Co. / Hiro Investment)',
+    role: 'Former Course Owner (Pre-2016–2020)',
+    category: 'Course Owners & Investors',
+    description:
+      'Operated multiple Ahwatukee golf courses; shut down Club West in 2016 amid potable water costs and HOA litigation before selling in June 2020.',
+  },
+  {
+    id: 'stk-edge',
+    name: 'The Edge at Club West LLC',
+    role: 'Owner & Litigant (2020–2026)',
+    category: 'Course Owners & Investors',
+    description:
+      'Bought the defunct 162-acre parcel for $750,000 on June 1, 2020; fought 4+ years of litigation clearing the land for alternative uses before selling for $2.1M.',
+  },
+  {
+    id: 'stk-harmony',
+    name: 'Community Harmony Coalition LLC',
+    role: 'Current Owner (May 29, 2026–Present)',
+    category: 'Course Owners & Investors',
+    description:
+      '15-investor LLC that acquired the 162 acres + clubhouse for $2.1M on May 29, 2026 and placed it on the market via Nathan & Associates.',
+  },
+  {
+    id: 'stk-hoa',
+    name: 'Foothills Club West HOA & 360 Community Management',
+    role: 'Master Community Association',
+    category: 'HOA & Community',
+    description:
+      'Manages community governance, architectural compliance, and public owner documents from 16414 S. 14th Ave after transitioning from Vision Community Management.',
+  },
+  {
+    id: 'stk-conservancy',
+    name: 'Club West Conservancy / Save Club West',
+    role: 'Homeowner Advocacy Nonprofit',
+    category: 'HOA & Community',
+    description:
+      'Resident coalition that blocked secret 2018–2019 HOA amendments in CV2020-003577 but lost the broader perpetual-golf fight in CV2021-018435.',
+  },
+  {
+    id: 'stk-nathan',
+    name: 'Nathan & Associates Inc.',
+    role: 'Scottsdale Land Brokerage',
+    category: 'Homebuilders & Brokers',
+    description:
+      'Retained by Community Harmony Coalition in mid-2026 to market the 162-acre parcel to major homebuilders.',
+  },
+  {
+    id: 'stk-horton',
+    name: 'D.R. Horton',
+    role: 'Prospective Builder (573-Home Concept)',
+    category: 'Homebuilders & Brokers',
+    description:
+      'Nation’s largest homebuilder; filed a 573-home pre-application for Club West while also developing the adjacent 373-acre Upper Canyon community.',
+  },
+  {
+    id: 'stk-sekisui',
+    name: 'Sekisui House Ltd.',
+    role: 'Prospective Builder (278-Home Concept)',
+    category: 'Homebuilders & Brokers',
+    description:
+      'Japanese global homebuilder that submitted a Nov 2026 Phoenix pre-application for 278 single-family homes and 88.5 acres of open space & drainage.',
+  },
+];
+
+export const SOURCES: SourceReference[] = [
+  {
+    id: 'src-ahwatukee-sekisui',
+    title: 'New builder eyes fewer homes for Club West course',
+    publisher: 'Ahwatukee Foothills News (Paul Maryniak)',
+    url: 'https://www.ahwatukee.com/news/new-builder-eyes-fewer-homes-for-club-west-course/article_c9b96076-7307-443f-8adf-fed3dcd0ddef.html',
+    note: 'Primary November 2026 report detailing Sekisui House Ltd.’s 278-home, 88.5-acre open space pre-application.',
+  },
+  {
+    id: 'src-5amphoenix',
+    title: 'Phoenix Planning & Development Pre-Application Summary (Sekisui House)',
+    publisher: '5am Phoenix / MuckRack Coverage Index',
+    url: 'https://muckrack.com/paul-maryniak',
+    note: 'Summarizes Paul Maryniak’s reporting on Sekisui House’s 278-home / 88.5-acre Club West filing.',
+  },
+  {
+    id: 'src-kennard',
+    title: 'Club West Golf Course History, Litigation & 2026 Updates',
+    publisher: 'Camille Kennard Real Estate / Ahwatukee Market Tracker',
+    url: 'https://www.camillekennardrealtor.com',
+    note: 'Documents 2016 closure, 2017–Feb 2018 $200K water bankruptcy, $750K Edge sale, $2.1M May 29, 2026 sale, and 573-home D.R. Horton pre-app.',
+  },
+  {
+    id: 'src-ktar',
+    title: 'Investor Group Purchases Shuttered Ahwatukee Club West Course & Relists',
+    publisher: 'KTAR News',
+    url: 'https://ktar.com',
+    note: 'Covers Community Harmony Coalition’s $2.1M purchase and Nathan & Associates Inc. marketing.',
+  },
+  {
+    id: 'src-justia',
+    title: 'Club West Conservancy v. Shea Homes LP, et al. (No. 1 CA-SA 25-0117)',
+    publisher: 'Arizona Court of Appeals Division One (via Justia)',
+    url: 'https://law.justia.com',
+    note: 'October 27, 2025 published special action decision addressing CV2021-018435 Rule 54(b) and attorney-fee procedures.',
+  },
+  {
+    id: 'src-hoawatch',
+    title: 'Foothills Club West HOA & CV2020-003577 Governance Archive',
+    publisher: 'AZ HOA Watch / 360 Community Management Portal',
+    url: 'https://www.360propertymgt.com/community/foothills-club-west-community-association/',
+    note: 'Official Foothills Club West HOA management portal, governing document access, and CV2020-003577 references.',
+  },
+  {
+    id: 'src-clubresort',
+    title: 'Wilson Gee Water Shutoff & HOA Countersuit Coverage (2016)',
+    publisher: 'Club + Resort Business',
+    url: 'https://www.clubandresortbusiness.com',
+    note: 'Covers the $159,000 water bill shutoff, $100,000 payment, "hay-like appearance" allegations, and fire-sale countersuit.',
+  },
+  {
+    id: 'src-ccr-analysis',
+    title: 'Foothills Club West 1989 Master CC&Rs & 1993 Golf Declaration Analysis',
+    publisher: 'Savvy Realty AZ / Public Covenant Records',
+    url: 'https://www.savvyrealtyaz.com',
+    note: 'Details 1989 Master CC&Rs (75% vote), 1993 Golf Declaration, 2010 Assignment, 2018–2019 amendments, and Judge Kiley / Judge Pineda rulings.',
+  },
+  {
+    id: 'src-golfpass',
+    title: 'Club West Golf Club Course Profile (1993)',
+    publisher: 'GolfPass / Course Architecture Records',
+    url: 'https://www.golfpass.com',
+    note: 'Confirms 1993 opening, par-72 layout, and architects Brian Whitcomb & Ken Kavanaugh.',
+  },
+];
