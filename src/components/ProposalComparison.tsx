@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { ArrowUpRight, Home, Maximize2, Trees, X } from 'lucide-react';
+import { ArrowUpRight, Home, Image, Map, Maximize2, Trees, X } from 'lucide-react';
 import { PARCEL_METADATA, PROPOSALS } from '../data/clubWestData';
 import { calculateDensityReductionPercent } from '../utils/filters';
+import { InteractiveSitePlanSvg } from './InteractiveSitePlanSvg';
 
 const LOT_MIX = [
   { size: "50' × 125'", units: 82, mix: '29.5%', swatch: '#a79b64', zone: 'West corridor (W. Chandler Blvd / S. 17th Ave)' },
@@ -11,6 +12,7 @@ const LOT_MIX = [
 
 export function ProposalComparison() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [planView, setPlanView] = useState<'vector' | 'cad'>('vector');
 
   const horton = PROPOSALS.find((p) => p.id === 'prop-drhorton')!;
   const sekisui = PROPOSALS.find((p) => p.id === 'prop-sekisui')!;
@@ -77,28 +79,54 @@ export function ProposalComparison() {
         </div>
       </div>
 
-      {/* Circulating Preliminary CAD Site Plan Exhibit */}
+      {/* Circulating Preliminary CAD Site Plan Exhibit + Crisp Vector Recreation */}
       <div className="site-plan-showcase">
         <div className="site-plan-media">
-          <button
-            type="button"
-            className="site-plan-zoom-btn"
-            onClick={() => setLightboxOpen(true)}
-            title="Click to inspect full-size site plan"
-          >
-            <img
-              src="./images/sekisui-club-west-site-plan.jpg"
-              alt="Preliminary CAD site plan exhibit for Club West showing 278 single-family lots and 88.49 acres of open space between W. Chandler Blvd, S. 17th Ave, S. Central Ave, W. Liberty Ln, and AZ Loop 202"
-              loading="lazy"
-            />
-            <span className="zoom-pill">
-              <Maximize2 size={14} />
-              <span>Inspect Full-Size Plan</span>
-            </span>
-          </button>
+          <div className="site-plan-switcher">
+            <div className="segmented-toggle" role="group" aria-label="Site plan display mode">
+              <button
+                type="button"
+                className={planView === 'vector' ? 'active' : ''}
+                onClick={() => setPlanView('vector')}
+              >
+                <Map size={13} style={{ marginRight: 5, verticalAlign: '-2px' }} />
+                Crisp Vector Map
+              </button>
+              <button
+                type="button"
+                className={planView === 'cad' ? 'active' : ''}
+                onClick={() => setPlanView('cad')}
+              >
+                <Image size={13} style={{ marginRight: 5, verticalAlign: '-2px' }} />
+                Original CAD Image
+              </button>
+            </div>
+          </div>
+
+          {planView === 'vector' ? (
+            <InteractiveSitePlanSvg />
+          ) : (
+            <button
+              type="button"
+              className="site-plan-zoom-btn"
+              onClick={() => setLightboxOpen(true)}
+              title="Click to inspect full-size site plan"
+            >
+              <img
+                src="./images/sekisui-club-west-site-plan.jpg"
+                alt="Preliminary CAD site plan exhibit for Club West showing 278 single-family lots and 88.49 acres of open space between W. Chandler Blvd, S. 17th Ave, S. Central Ave, W. Liberty Ln, and AZ Loop 202"
+                loading="lazy"
+              />
+              <span className="zoom-pill">
+                <Maximize2 size={14} />
+                <span>Inspect Full-Size Plan</span>
+              </span>
+            </button>
+          )}
+
           <p className="site-plan-caption">
-            Circulating preliminary CAD exhibit (<code>FS-BASE_Opt 5.dwg</code>, Sept 2026) referenced alongside{' '}
-            <em>Ahwatukee Foothills News</em> reporting. Pre-application submittals live inside{' '}
+            Vector schematic recreated from circulating preliminary CAD exhibit (<code>FS-BASE_Opt 5.dwg</code>,
+            Sept 2026). Pre-application submittals live inside{' '}
             <a href="https://shapephx.phoenix.gov/" target="_blank" rel="noreferrer">
               Phoenix SHAPE PHX
             </a>{' '}
