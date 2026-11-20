@@ -1,8 +1,17 @@
-import { ArrowUpRight, Home, Trees } from 'lucide-react';
-import { PROPOSALS } from '../data/clubWestData';
+import { useState } from 'react';
+import { ArrowUpRight, Home, Maximize2, Trees, X } from 'lucide-react';
+import { PARCEL_METADATA, PROPOSALS } from '../data/clubWestData';
 import { calculateDensityReductionPercent } from '../utils/filters';
 
+const LOT_MIX = [
+  { size: "50' × 125'", units: 82, mix: '29.5%', swatch: '#a79b64', zone: 'West corridor (W. Chandler Blvd / S. 17th Ave)' },
+  { size: "60' × 135'", units: 96, mix: '34.5%', swatch: '#d697a8', zone: 'Central fairway corridor' },
+  { size: "70' × 135'", units: 100, mix: '36.0%', swatch: '#cb834d', zone: 'East corridor (S. Central Ave) & gated hillside parcels' },
+];
+
 export function ProposalComparison() {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
   const horton = PROPOSALS.find((p) => p.id === 'prop-drhorton')!;
   const sekisui = PROPOSALS.find((p) => p.id === 'prop-sekisui')!;
   const reductionPct = calculateDensityReductionPercent(horton, sekisui);
@@ -35,34 +44,119 @@ export function ProposalComparison() {
             −{homesSaved} Homes (−{reductionPct}%)
           </strong>
           <p>
-            Sekisui House Ltd.’s November 2026 pre-application proposes <strong>278 single-family homes</strong>{' '}
-            and preserves <strong>88.5 acres (54.6%)</strong> as amenitized open space, passive open space,
-            and drainage—down sharply from D.R. Horton’s 573-home pre-application.
+            Sekisui House Ltd.’s preliminary pre-application proposes <strong>278 single-family lots</strong>{' '}
+            across <strong>162.08 gross acres</strong> and preserves <strong>88.49 acres (55%)</strong> as
+            amenitized open space, passive open space, and retention—down sharply from D.R. Horton’s
+            573-home pre-application.
           </p>
         </div>
 
         <div className="allocation-visual" aria-label="162-acre land allocation breakdown for Sekisui House proposal">
           <div className="allocation-header">
-            <span>Sekisui House 162-Acre Land Split</span>
-            <span className="mono-tag">88.5 Ac Open · 73.5 Ac Residential/Streets</span>
+            <span>Sekisui House 162.08-Acre Land Split</span>
+            <span className="mono-tag">88.49 Ac Open · 73.59 Ac Residential/Streets</span>
           </div>
           <div className="allocation-bar">
             <div
               className="alloc-open"
-              style={{ width: `${(88.5 / 162) * 100}%` }}
-              title="88.5 Acres Amenitized / Passive Open Space & Drainage (54.6%)"
+              style={{ width: `${(88.49 / 162.08) * 100}%` }}
+              title="88.49 Acres Amenitized / Passive Open Space & Retention (55%)"
             >
               <Trees size={14} />
-              <span>54.6% Open &amp; Drainage (88.5 ac)</span>
+              <span>55% Open &amp; Retention (88.49 ac)</span>
             </div>
             <div
               className="alloc-dev"
-              style={{ width: `${(73.5 / 162) * 100}%` }}
-              title="73.5 Acres Residential Lots & Streets (45.4%)"
+              style={{ width: `${(73.59 / 162.08) * 100}%` }}
+              title="73.59 Acres Residential Lots & Streets (45%)"
             >
               <Home size={14} />
-              <span>45.4% Lots &amp; Streets (73.5 ac)</span>
+              <span>45% Lots &amp; Streets (73.59 ac)</span>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Circulating Preliminary CAD Site Plan Exhibit */}
+      <div className="site-plan-showcase">
+        <div className="site-plan-media">
+          <button
+            type="button"
+            className="site-plan-zoom-btn"
+            onClick={() => setLightboxOpen(true)}
+            title="Click to inspect full-size site plan"
+          >
+            <img
+              src="./images/sekisui-club-west-site-plan.jpg"
+              alt="Preliminary CAD site plan exhibit for Club West showing 278 single-family lots and 88.49 acres of open space between W. Chandler Blvd, S. 17th Ave, S. Central Ave, W. Liberty Ln, and AZ Loop 202"
+              loading="lazy"
+            />
+            <span className="zoom-pill">
+              <Maximize2 size={14} />
+              <span>Inspect Full-Size Plan</span>
+            </span>
+          </button>
+          <p className="site-plan-caption">
+            Circulating preliminary CAD exhibit (<code>FS-BASE_Opt 5.dwg</code>, Sept 2026) referenced alongside{' '}
+            <em>Ahwatukee Foothills News</em> reporting. Pre-application submittals live inside{' '}
+            <a href="https://shapephx.phoenix.gov/" target="_blank" rel="noreferrer">
+              Phoenix SHAPE PHX
+            </a>{' '}
+            prior to formal Village Planning Committee hearings.
+          </p>
+        </div>
+
+        <div className="site-plan-data">
+          <div className="site-plan-data-head">
+            <span className="mono-tag">Exhibit Site Data · 162.08 Gross Acres</span>
+            <h3>278-Lot Mix &amp; Parcel Identifiers</h3>
+          </div>
+
+          <div className="lot-mix-table">
+            {LOT_MIX.map((row) => (
+              <div key={row.size} className="lot-mix-row">
+                <div className="lot-mix-title">
+                  <span className="lot-swatch" style={{ backgroundColor: row.swatch }} />
+                  <strong>{row.size}</strong>
+                  <span className="mono-tag">
+                    {row.units} lots ({row.mix})
+                  </span>
+                </div>
+                <span className="lot-mix-zone">{row.zone}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="apn-block">
+            <span className="mono-tag">Maricopa County APNs (City of Phoenix Zoning)</span>
+            <div className="apn-pills">
+              {PARCEL_METADATA.apns.map((apn) => (
+                <span key={apn} className="figure-tag">
+                  {apn}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="doc-links-row">
+            <a
+              href="https://lobbyist.phoenix.gov/Search/ClientInformation/3c285c95-af58-4c80-bae3-80bd90b653b4"
+              target="_blank"
+              rel="noreferrer"
+              className="doc-link-btn wayback"
+            >
+              <span>Phoenix Lobbyist Record (Sekisui / Withey Morris)</span>
+              <ArrowUpRight size={12} />
+            </a>
+            <a
+              href="https://www.phoenix.gov/administration/departments/pdd/planning-zoning/villages/ahwatukee-foothills.html"
+              target="_blank"
+              rel="noreferrer"
+              className="doc-link-btn"
+            >
+              <span>Ahwatukee Village Planning Committee</span>
+              <ArrowUpRight size={12} />
+            </a>
           </div>
         </div>
       </div>
@@ -123,6 +217,31 @@ export function ProposalComparison() {
           );
         })}
       </div>
+
+      {lightboxOpen && (
+        <div
+          className="lightbox-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Full-size Sekisui House preliminary site plan"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="lightbox-close"
+              onClick={() => setLightboxOpen(false)}
+              aria-label="Close full-size site plan"
+            >
+              <X size={20} />
+            </button>
+            <img
+              src="./images/sekisui-club-west-site-plan.jpg"
+              alt="Full-size preliminary CAD site plan exhibit for Club West 278-lot proposal"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
